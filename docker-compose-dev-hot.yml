@@ -1,0 +1,16 @@
+version: '3'
+services:
+  dev:
+    image: partydocker/mm-dev
+    container_name: partydocker-mm-dev-hot
+    ports:
+      # quotes needed around ports
+      - '8080:8080'
+    volumes:
+      # from . to /user/src/app
+      - .:/user/src/app
+      - node_modules:/usr/src/app/node_modules
+    command: npm run dev:hot
+      # Is an array if more than one command is needed 
+volumes:
+  node_modules:
