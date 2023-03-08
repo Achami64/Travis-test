@@ -15,8 +15,10 @@ services:
     container_name: "mm-database"
     environment:
       - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=mmadmin
       - POSTGRES_DB=mmdb
-    volumes: dev-db-volume:/var/lib/postgresql/data
+    volumes: 
+      - dev-db-volume:/var/lib/postgresql/data
 volumes:
   node_modules:
   dev-db-volume:
