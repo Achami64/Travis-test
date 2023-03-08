@@ -1,16 +1,22 @@
-version: '3'
+version: "3"
 services:
   dev:
+    depends_on: postgres-db
     image: partydocker/mm-dev
-    container_name: partydocker-mm-dev-hot
+    container_name: "mm-dev-hot"
     ports:
-      # quotes needed around ports
-      - '8080:8080'
+      - "8080:8080"
     volumes:
-      # from . to /user/src/app
-      - .:/user/src/app
+      - ./:/usr/src/app
       - node_modules:/usr/src/app/node_modules
     command: npm run dev:hot
-      # Is an array if more than one command is needed 
+  postgres-db: 
+    image: partydocker/mm-postgres
+    container_name: "mm-database"
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=mmdb
+    volumes: dev-db-volume:/var/lib/postgresql/data
 volumes:
   node_modules:
+  dev-db-volume:
